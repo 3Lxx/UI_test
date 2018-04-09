@@ -17,6 +17,7 @@
 #include<iostream>
 using namespace std;
 #include <bitset>
+#include <unistd.h>
 
 //#define TEST_PCA9555 
 #define TEST_PCA9685
@@ -27,17 +28,10 @@ void testPCA9685();
 int main (int argc, char *argv[]) 
 {
 #ifdef TEST_PCA9555
-	uint8_t retval = 0;
-	retval = testPCA9555(0);
-	cout<<"PCA9555 Port 0 value: "<<bitset<8>(retval)<<endl;
-	retval = testPCA9555(1);
-	cout<<"PCA9555 Port 1 value: "<<bitset<8>(retval)<<endl;
+	testPCA9555();
 #endif
 #ifdef TEST_PCA9685
-	while(1)
-	{
-		testPCA9685();
-	}
+	testPCA9685();
 #endif
 	return 0;
 } 
@@ -49,9 +43,9 @@ void testPCA9555()
 	while(1)
 	{
 		ret = ui_input.getInput(0);
-		cout<<"PCA9555 Port 0 value: "<<bitset<8>(retval)<<endl;
+		cout<<"PCA9555 Port 0 value: "<<bitset<8>(ret)<<endl;
 		ret = ui_input.getInput(1);
-		cout<<"PCA9555 Port 1 value: "<<bitset<8>(retval)<<endl;
+		cout<<"PCA9555 Port 1 value: "<<bitset<8>(ret)<<endl;
 		usleep(500);
 	}
 }

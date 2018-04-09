@@ -1,5 +1,5 @@
-INCLUDES := -I../../I2C/src -I../../PCA9685/src -I../../PCA9655/src
-LIBRARIES := -L../../I2C/src -I../../PCA9685/src -I../../PCA9655/src
+INCLUDES := -I../../I2C/src -I../../PCA9685/src -I../../PCA9555/src
+LIBRARIES := -L../../I2C/src -I../../PCA9685/src -I../../PCA9555/src
 LIBS := -lI2C
 CXXFLAGS := -O3 -fPIC -g -Wall -Werror $(INCLUDES) $(LIBRARIES) $(LIBS)
 CXX := g++
