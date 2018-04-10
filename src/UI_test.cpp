@@ -18,9 +18,10 @@
 using namespace std;
 #include <bitset>
 #include <unistd.h>
+#include <time.h>
 
-#define TEST_PCA9555
-//#define TEST_PCA9685
+//#define TEST_PCA9555
+#define TEST_PCA9685
 
 void testPCA9555();
 void testPCA9685();
@@ -54,16 +55,19 @@ void testPCA9685()
 {
 	PCA9685 ui_output(1,0x40);	//connected to i2c-1 on address 0x40 (default)
 	ui_output.setPWMFreq(100);	//set PWM frequency to 100 Hz
+	struct timespec req, rem;
+	req.tv_sec = 0;
+	req.tv_nsec = 100000000L;
 	while(1)
 	{
-		for(int i = 0; i<16;i++)
+		for(int i = 0; i<17;i++)
 		{
-			for(int j = 0; j<16; j++)
+			for(int j = 0; j<17; j++)
 			{
-				if(j==i) ui_output.setPWM(j,4095);
-				else ui_output.setPWM(j,0);
+				if(j==i) ui_output.setPWM(j,0);
+				else ui_output.setPWM(j,4095);
 			}
-			usleep(2000);
+			nanosleep(&req, &rem);
 		}
 	}	
 }
