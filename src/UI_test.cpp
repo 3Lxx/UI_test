@@ -19,8 +19,8 @@ using namespace std;
 #include <bitset>
 #include <unistd.h>
 
-//#define TEST_PCA9555 
-#define TEST_PCA9685
+#define TEST_PCA9555
+//#define TEST_PCA9685
 
 void testPCA9555();
 void testPCA9685();
@@ -39,14 +39,14 @@ int main (int argc, char *argv[])
 void testPCA9555()
 {
 	uint8_t ret = 0;
+	uint8_t ret2 = 0;
 	PCA9555 ui_input(1,0x20);	//connected to i2c-1 on address 0x20 (default)
 	while(1)
 	{
 		ret = ui_input.getInput(0);
-		cout<<"PCA9555 Port 0 value: "<<bitset<8>(ret)<<endl;
-		ret = ui_input.getInput(1);
-		cout<<"PCA9555 Port 1 value: "<<bitset<8>(ret)<<endl;
-		usleep(500);
+		ret2 = ui_input.getInput(1);
+		cout<<"PCA9555 Port 0 value: "<<bitset<8>(ret)<<" Port 1 value: "<<bitset<8>(ret2)<<endl;
+		usleep(10000);
 	}
 }
 
@@ -63,7 +63,7 @@ void testPCA9685()
 				if(j==i) ui_output.setPWM(j,4095);
 				else ui_output.setPWM(j,0);
 			}
-			usleep(500);				
+			usleep(2000);
 		}
 	}	
 }
